@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>LstApi</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Util\Seq.fs" />
+    <Compile Include="Util\List.fs" />
+    <Compile Include="Util\DateTimeHelpers.fs" />
+    <Compile Include="Model\Geolocation.fs" />
+    <Compile Include="Model\OffsetResolution.fs" />
+    <Compile Include="Model\Timestamp.fs" />
+    <Compile Include="Model\TimeZoneAdjustments.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SolarCalculator" Version="3.2.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LstApi.Tests", "LstApi.Tests\LstApi.Tests.fsproj", "{51F00931-CCED-4072-969C-0240E0E375CF}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LstApi", "LstApi\LstApi.fsproj", "{7D47986B-26F9-4D82-8AC3-E3909E17CD67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51F00931-CCED-4072-969C-0240E0E375CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F00931-CCED-4072-969C-0240E0E375CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F00931-CCED-4072-969C-0240E0E375CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F00931-CCED-4072-969C-0240E0E375CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D47986B-26F9-4D82-8AC3-E3909E17CD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D47986B-26F9-4D82-8AC3-E3909E17CD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D47986B-26F9-4D82-8AC3-E3909E17CD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D47986B-26F9-4D82-8AC3-E3909E17CD67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
