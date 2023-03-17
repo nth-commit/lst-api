@@ -13,10 +13,12 @@
     <Compile Include="Model\OffsetResolution.fs" />
     <Compile Include="Model\Timestamp.fs" />
     <Compile Include="Model\TimeZoneAdjustments.fs" />
+    <Compile Include="Http.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Giraffe" Version="6.0.0" />
     <PackageReference Include="SolarCalculator" Version="3.2.1" />
   </ItemGroup>
 

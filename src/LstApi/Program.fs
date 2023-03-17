@@ -1,14 +1,20 @@
-open System
+open Giraffe
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Hosting
+open LstApi
 
-[<EntryPoint>]
-let main args =
-    let builder = WebApplication.CreateBuilder(args)
-    let app = builder.Build()
+let routes: HttpHandler =
+    choose
+        [ route "/ping" >=> text "pong"
+          route "/time-zone-adjustments" >=> Http.TimeZoneAdjustments.handler ]
 
-    app.MapGet("/", Func<string>(fun () -> "Hello World!")) |> ignore
+let builder = WebApplication.CreateBuilder()
+builder.Services.AddGiraffe() |> ignore
 
-    app.Run()
+let app = builder.Build()
+app.UseGiraffe routes
+app.Run()
 
-    0 // Exit code
+type Program() =
+    class
+    end

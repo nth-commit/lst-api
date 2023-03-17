@@ -7,13 +7,13 @@ type Timestamp =
 
     static member value(Timestamp x) = x
 
-    static member public (-)(x: Timestamp, y: Timestamp) =
+    static member (-)(x: Timestamp, y: Timestamp) =
         TimeSpan.FromTicks((x |> Timestamp.value) - (y |> Timestamp.value))
 
-    static member public (-)(x: Timestamp, y: TimeSpan) =
+    static member (-)(x: Timestamp, y: TimeSpan) =
         Timestamp((x |> Timestamp.value) - y.Ticks)
 
-    static member public (+)(x: Timestamp, y: TimeSpan) =
+    static member (+)(x: Timestamp, y: TimeSpan) =
         Timestamp((x |> Timestamp.value) + y.Ticks)
 
     member this.ToDateTimeOffset() =
