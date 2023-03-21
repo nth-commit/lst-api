@@ -3,51 +3,18 @@ module LstApi.Http
 open System
 open System.ComponentModel.DataAnnotations
 open System.Collections.Generic
+open FsToolkit.ErrorHandling
 open Giraffe
 open LstApi.Model
 open LstApi.Model.TimeZoneAdjustments
 open Microsoft.AspNetCore.Http
 open Microsoft.AspNetCore.Mvc
 
-type MiddlewareResult<'State> = Result<'State, ProblemDetails>
+type EndpointResult<'Response> = Result<'Response, ProblemDetails>
 
-type Middleware<'State> = HttpContext -> MiddlewareResult<'State>
+module EndpointResult =
 
-module Middleware =
-
-    let bind<'State, 'NextState>
-        (f: 'State -> Middleware<'NextState>)
-        (m: Middleware<'State>)
-        : Middleware<'NextState> =
-        fun ctx ->
-            match m ctx with
-            | Ok x -> f x ctx
-            | Error x -> Error x
-
-    let bindResult<'State, 'NextState>
-        (f: 'State -> MiddlewareResult<'NextState>)
-        (m: Middleware<'State>)
-        : Middleware<'NextState> =
-        let f': 'State -> Middleware<'NextState> =
-            fun x ->
-                let r = f x
-                fun _ -> r
-
-        bind f' m
-
-    let toHandler (success: 'State -> HttpHandler) (m: Middleware<'State>) : HttpHandler =
-        fun next ctx ->
-            match m ctx with
-            | Ok x -> success x next ctx
-            | Error problem ->
-                let f =
-                    setStatusCode problem.Status.Value
-                    >=> setContentType "application/problem+json"
-                    >=> json problem
-
-                f next ctx
-
-    let private validate (request: 'a) : MiddlewareResult<'a> =
+    let private validate (request: 'a) : EndpointResult<'a> =
         let validationContext = ValidationContext(request)
         let validationResults = List<ValidationResult>()
 
@@ -55,18 +22,37 @@ module Middleware =
             Validator.TryValidateObject(request, validationContext, validationResults, true)
 
         if isValid then
-            MiddlewareResult.Ok request
+            EndpointResult.Ok request
         else
             let detail =
                 validationResults |> Seq.map (fun x -> x.ErrorMessage) |> String.concat "\n"
 
             let problem = ProblemDetails(Status = 400, Title = "Bad Request", Detail = detail)
-            MiddlewareResult.Error problem
+            EndpointResult.Error problem
 
-    let queryStringToState<'State> : Middleware<'State> =
-        fun ctx ->
-            let request = ctx.BindQueryString<'State>()
-            validate request
+    let bindQueryString<'State> (ctx: HttpContext) : EndpointResult<'State> =
+        let request = ctx.BindQueryString<'State>()
+        validate request
+
+type Endpoint<'Response> = HttpContext -> Async<EndpointResult<'Response>>
+
+module Endpoint =
+
+    let private toHandlerFromResult (endpointResult: EndpointResult<'Response>) : HttpHandler =
+        match endpointResult with
+        | Ok x -> setStatusCode 200 >=> setContentType "application/json" >=> json x
+        | Error problem ->
+            setStatusCode problem.Status.Value
+            >=> setContentType "application/problem+json"
+            >=> json problem
+
+    let toHandler (endpoint: Endpoint<'Response>) : HttpHandler =
+        fun next ctx ->
+            task {
+                let! result = endpoint ctx
+                let handler = toHandlerFromResult result
+                return! handler next ctx
+            }
 
 module TimeZoneAdjustments =
 
@@ -90,7 +76,7 @@ module TimeZoneAdjustments =
         | Some "one_hour" -> Ok OffsetResolution.OneHour
         | Some x -> Error $"Invalid offset resolution '{x}'"
 
-    let private queryToOptions (query: TimeZoneAdjustmentsQuery) : MiddlewareResult<TimeZoneAdjustmentOptions> =
+    let private queryToOptions (query: TimeZoneAdjustmentsQuery) : EndpointResult<TimeZoneAdjustmentOptions> =
         parseOffsetResolution query.offsetResolution
         |> Result.map (fun offsetResolution ->
             { Location =
@@ -106,10 +92,12 @@ module TimeZoneAdjustments =
            Offset = adjustment.Offset |}
 
     let handler: HttpHandler =
-        Middleware.queryStringToState<TimeZoneAdjustmentsQuery>
-        |> Middleware.bindResult<TimeZoneAdjustmentsQuery, TimeZoneAdjustmentOptions> queryToOptions
-        |> Middleware.toHandler (fun options ->
-            calculateTimeZoneAdjustments options
-            |> Seq.map adjustmentToDto
-            |> Seq.toArray
-            |> json)
+        Endpoint.toHandler (fun ctx ->
+            asyncResult {
+                let! query = EndpointResult.bindQueryString<TimeZoneAdjustmentsQuery> ctx
+                let! options = queryToOptions query
+
+                let adjustments = calculateTimeZoneAdjustments options
+
+                return adjustments |> Seq.map adjustmentToDto |> Seq.toArray
+            })
