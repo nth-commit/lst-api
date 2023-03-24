@@ -6,7 +6,8 @@ open LstApi
 let routes: HttpHandler =
     choose
         [ route "/ping" >=> text "pong"
-          route "/time-zone-adjustments" >=> Http.TimeZoneAdjustments.handler ]
+          route "/time-zone-adjustments" >=> Http.TimeZoneAdjustments.handler
+          route "/rules" >=> Http.Rules.handler ]
 
 let builder = WebApplication.CreateBuilder()
 builder.Services.AddGiraffe() |> ignore
