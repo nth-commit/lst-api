@@ -72,3 +72,11 @@ let takeUntilHeadRepeatedBy (f: 'a -> 'b) (a: 'a seq) : 'a seq =
     match a |> Seq.tryHead with
     | Option.None -> Seq.empty
     | Option.Some x -> Seq.append (x |> Seq.singleton) (loop (a |> Seq.tail) (f x))
+
+let pairwiseWrapped (a : 'a seq) : ('a * 'a) seq =
+    a
+    |> Seq.indexed
+    |> repeat 2
+    |> Seq.pairwise
+    |> takeUntilHeadRepeatedBy (fun ((i,_),_) -> i)
+    |> Seq.map (fun ((_,x),(_,y)) -> (x,y))

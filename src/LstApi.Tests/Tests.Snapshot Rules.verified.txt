@@ -1,78 +1,78 @@
-﻿Date = 03/01, Time = 8:00 pm, UTC Offset = 07:00:00
-Date = 07/01, Time = 8:00 pm, UTC Offset = 06:55:00
-Date = 12/01, Time = 8:00 pm, UTC Offset = 06:50:00
-Date = 17/01, Time = 8:00 pm, UTC Offset = 06:45:00
-Date = 21/01, Time = 8:00 pm, UTC Offset = 06:40:00
-Date = 24/01, Time = 8:00 pm, UTC Offset = 06:35:00
-Date = 28/01, Time = 8:00 pm, UTC Offset = 06:30:00
-Date = 01/02, Time = 8:00 pm, UTC Offset = 06:25:00
-Date = 04/02, Time = 8:00 pm, UTC Offset = 06:20:00
-Date = 08/02, Time = 8:00 pm, UTC Offset = 06:15:00
-Date = 12/02, Time = 8:00 pm, UTC Offset = 06:10:00
-Date = 16/02, Time = 8:00 pm, UTC Offset = 06:05:00
-Date = 19/02, Time = 8:00 pm, UTC Offset = 06:00:00
-Date = 23/02, Time = 8:00 pm, UTC Offset = 05:55:00
-Date = 27/02, Time = 8:00 pm, UTC Offset = 05:50:00
-Date = 03/03, Time = 8:00 pm, UTC Offset = 05:45:00
-Date = 07/03, Time = 8:00 pm, UTC Offset = 05:40:00
-Date = 11/03, Time = 8:00 pm, UTC Offset = 05:35:00
-Date = 15/03, Time = 8:00 pm, UTC Offset = 05:30:00
-Date = 19/03, Time = 8:00 pm, UTC Offset = 05:25:00
-Date = 24/03, Time = 8:00 pm, UTC Offset = 05:20:00
-Date = 28/03, Time = 8:00 pm, UTC Offset = 05:15:00
-Date = 01/04, Time = 8:00 pm, UTC Offset = 05:10:00
-Date = 05/04, Time = 8:00 pm, UTC Offset = 05:05:00
-Date = 10/04, Time = 8:00 pm, UTC Offset = 05:00:00
-Date = 14/04, Time = 8:00 pm, UTC Offset = 04:55:00
-Date = 19/04, Time = 8:00 pm, UTC Offset = 04:50:00
-Date = 23/04, Time = 8:00 pm, UTC Offset = 04:45:00
-Date = 27/04, Time = 8:00 pm, UTC Offset = 04:40:00
-Date = 02/05, Time = 8:00 pm, UTC Offset = 04:35:00
-Date = 06/05, Time = 8:00 pm, UTC Offset = 04:30:00
-Date = 11/05, Time = 8:00 pm, UTC Offset = 04:25:00
-Date = 15/05, Time = 8:00 pm, UTC Offset = 04:20:00
-Date = 20/05, Time = 8:00 pm, UTC Offset = 04:15:00
-Date = 26/05, Time = 8:00 pm, UTC Offset = 04:10:00
-Date = 01/06, Time = 8:00 pm, UTC Offset = 04:05:00
-Date = 08/06, Time = 8:00 pm, UTC Offset = 04:00:00
-Date = 28/06, Time = 8:00 pm, UTC Offset = 03:55:00
-Date = 18/07, Time = 8:00 pm, UTC Offset = 04:00:00
-Date = 24/07, Time = 8:00 pm, UTC Offset = 04:05:00
-Date = 29/07, Time = 8:00 pm, UTC Offset = 04:10:00
-Date = 03/08, Time = 8:00 pm, UTC Offset = 04:15:00
-Date = 07/08, Time = 8:00 pm, UTC Offset = 04:20:00
-Date = 11/08, Time = 8:00 pm, UTC Offset = 04:25:00
-Date = 14/08, Time = 8:00 pm, UTC Offset = 04:30:00
-Date = 18/08, Time = 8:00 pm, UTC Offset = 04:35:00
-Date = 21/08, Time = 8:00 pm, UTC Offset = 04:40:00
-Date = 24/08, Time = 8:00 pm, UTC Offset = 04:45:00
-Date = 27/08, Time = 8:00 pm, UTC Offset = 04:50:00
-Date = 30/08, Time = 8:00 pm, UTC Offset = 04:55:00
-Date = 02/09, Time = 8:00 pm, UTC Offset = 05:00:00
-Date = 05/09, Time = 8:00 pm, UTC Offset = 05:05:00
-Date = 08/09, Time = 8:00 pm, UTC Offset = 05:10:00
-Date = 11/09, Time = 8:00 pm, UTC Offset = 05:15:00
-Date = 13/09, Time = 8:00 pm, UTC Offset = 05:20:00
-Date = 16/09, Time = 8:00 pm, UTC Offset = 05:25:00
-Date = 19/09, Time = 8:00 pm, UTC Offset = 05:30:00
-Date = 22/09, Time = 8:00 pm, UTC Offset = 05:35:00
-Date = 25/09, Time = 8:00 pm, UTC Offset = 05:40:00
-Date = 27/09, Time = 8:00 pm, UTC Offset = 05:45:00
-Date = 30/09, Time = 8:00 pm, UTC Offset = 05:50:00
-Date = 03/10, Time = 8:00 pm, UTC Offset = 05:55:00
-Date = 06/10, Time = 8:00 pm, UTC Offset = 06:00:00
-Date = 09/10, Time = 8:00 pm, UTC Offset = 06:05:00
-Date = 12/10, Time = 8:00 pm, UTC Offset = 06:10:00
-Date = 15/10, Time = 8:00 pm, UTC Offset = 06:15:00
-Date = 18/10, Time = 8:00 pm, UTC Offset = 06:20:00
-Date = 21/10, Time = 8:00 pm, UTC Offset = 06:25:00
-Date = 24/10, Time = 8:00 pm, UTC Offset = 06:30:00
-Date = 28/10, Time = 8:00 pm, UTC Offset = 06:35:00
-Date = 31/10, Time = 8:00 pm, UTC Offset = 06:40:00
-Date = 04/11, Time = 8:00 pm, UTC Offset = 06:45:00
-Date = 08/11, Time = 8:00 pm, UTC Offset = 06:50:00
-Date = 12/11, Time = 8:00 pm, UTC Offset = 06:55:00
-Date = 17/11, Time = 8:00 pm, UTC Offset = 07:00:00
-Date = 24/11, Time = 8:00 pm, UTC Offset = 07:05:00
-Date = 11/12, Time = 8:00 pm, UTC Offset = 07:10:00
-Date = 27/12, Time = 8:00 pm, UTC Offset = 07:05:00
+﻿Start = 03/01 - 8:00:00 pm, End = 07/01 - 8:04:59 pm, UTC Offset = 07:00:00
+Start = 07/01 - 8:00:00 pm, End = 12/01 - 8:04:59 pm, UTC Offset = 06:55:00
+Start = 12/01 - 8:00:00 pm, End = 17/01 - 8:04:59 pm, UTC Offset = 06:50:00
+Start = 17/01 - 8:00:00 pm, End = 21/01 - 8:04:59 pm, UTC Offset = 06:45:00
+Start = 21/01 - 8:00:00 pm, End = 24/01 - 8:04:59 pm, UTC Offset = 06:40:00
+Start = 24/01 - 8:00:00 pm, End = 28/01 - 8:04:59 pm, UTC Offset = 06:35:00
+Start = 28/02 - 8:00:00 pm, End = 01/02 - 8:04:59 pm, UTC Offset = 06:30:00
+Start = 01/02 - 8:00:00 pm, End = 04/02 - 8:04:59 pm, UTC Offset = 06:25:00
+Start = 04/02 - 8:00:00 pm, End = 08/02 - 8:04:59 pm, UTC Offset = 06:20:00
+Start = 08/02 - 8:00:00 pm, End = 12/02 - 8:04:59 pm, UTC Offset = 06:15:00
+Start = 12/02 - 8:00:00 pm, End = 16/02 - 8:04:59 pm, UTC Offset = 06:10:00
+Start = 16/02 - 8:00:00 pm, End = 19/02 - 8:04:59 pm, UTC Offset = 06:05:00
+Start = 19/02 - 8:00:00 pm, End = 23/02 - 8:04:59 pm, UTC Offset = 06:00:00
+Start = 23/02 - 8:00:00 pm, End = 27/02 - 8:04:59 pm, UTC Offset = 05:55:00
+Start = 27/03 - 8:00:00 pm, End = 03/03 - 8:04:59 pm, UTC Offset = 05:50:00
+Start = 03/03 - 8:00:00 pm, End = 07/03 - 8:04:59 pm, UTC Offset = 05:45:00
+Start = 07/03 - 8:00:00 pm, End = 11/03 - 8:04:59 pm, UTC Offset = 05:40:00
+Start = 11/03 - 8:00:00 pm, End = 15/03 - 8:04:59 pm, UTC Offset = 05:35:00
+Start = 15/03 - 8:00:00 pm, End = 19/03 - 8:04:59 pm, UTC Offset = 05:30:00
+Start = 19/03 - 8:00:00 pm, End = 24/03 - 8:04:59 pm, UTC Offset = 05:25:00
+Start = 24/03 - 8:00:00 pm, End = 28/03 - 8:04:59 pm, UTC Offset = 05:20:00
+Start = 28/04 - 8:00:00 pm, End = 01/04 - 8:04:59 pm, UTC Offset = 05:15:00
+Start = 01/04 - 8:00:00 pm, End = 05/04 - 8:04:59 pm, UTC Offset = 05:10:00
+Start = 05/04 - 8:00:00 pm, End = 10/04 - 8:04:59 pm, UTC Offset = 05:05:00
+Start = 10/04 - 8:00:00 pm, End = 14/04 - 8:04:59 pm, UTC Offset = 05:00:00
+Start = 14/04 - 8:00:00 pm, End = 19/04 - 8:04:59 pm, UTC Offset = 04:55:00
+Start = 19/04 - 8:00:00 pm, End = 23/04 - 8:04:59 pm, UTC Offset = 04:50:00
+Start = 23/04 - 8:00:00 pm, End = 27/04 - 8:04:59 pm, UTC Offset = 04:45:00
+Start = 27/05 - 8:00:00 pm, End = 02/05 - 8:04:59 pm, UTC Offset = 04:40:00
+Start = 02/05 - 8:00:00 pm, End = 06/05 - 8:04:59 pm, UTC Offset = 04:35:00
+Start = 06/05 - 8:00:00 pm, End = 11/05 - 8:04:59 pm, UTC Offset = 04:30:00
+Start = 11/05 - 8:00:00 pm, End = 15/05 - 8:04:59 pm, UTC Offset = 04:25:00
+Start = 15/05 - 8:00:00 pm, End = 20/05 - 8:04:59 pm, UTC Offset = 04:20:00
+Start = 20/05 - 8:00:00 pm, End = 26/05 - 8:04:59 pm, UTC Offset = 04:15:00
+Start = 26/06 - 8:00:00 pm, End = 01/06 - 8:04:59 pm, UTC Offset = 04:10:00
+Start = 01/06 - 8:00:00 pm, End = 08/06 - 8:04:59 pm, UTC Offset = 04:05:00
+Start = 08/06 - 8:00:00 pm, End = 28/06 - 8:04:59 pm, UTC Offset = 04:00:00
+Start = 28/07 - 8:00:00 pm, End = 18/07 - 7:54:59 pm, UTC Offset = 03:55:00
+Start = 18/07 - 8:00:00 pm, End = 24/07 - 7:54:59 pm, UTC Offset = 04:00:00
+Start = 24/07 - 8:00:00 pm, End = 29/07 - 7:54:59 pm, UTC Offset = 04:05:00
+Start = 29/08 - 8:00:00 pm, End = 03/08 - 7:54:59 pm, UTC Offset = 04:10:00
+Start = 03/08 - 8:00:00 pm, End = 07/08 - 7:54:59 pm, UTC Offset = 04:15:00
+Start = 07/08 - 8:00:00 pm, End = 11/08 - 7:54:59 pm, UTC Offset = 04:20:00
+Start = 11/08 - 8:00:00 pm, End = 14/08 - 7:54:59 pm, UTC Offset = 04:25:00
+Start = 14/08 - 8:00:00 pm, End = 18/08 - 7:54:59 pm, UTC Offset = 04:30:00
+Start = 18/08 - 8:00:00 pm, End = 21/08 - 7:54:59 pm, UTC Offset = 04:35:00
+Start = 21/08 - 8:00:00 pm, End = 24/08 - 7:54:59 pm, UTC Offset = 04:40:00
+Start = 24/08 - 8:00:00 pm, End = 27/08 - 7:54:59 pm, UTC Offset = 04:45:00
+Start = 27/08 - 8:00:00 pm, End = 30/08 - 7:54:59 pm, UTC Offset = 04:50:00
+Start = 30/09 - 8:00:00 pm, End = 02/09 - 7:54:59 pm, UTC Offset = 04:55:00
+Start = 02/09 - 8:00:00 pm, End = 05/09 - 7:54:59 pm, UTC Offset = 05:00:00
+Start = 05/09 - 8:00:00 pm, End = 08/09 - 7:54:59 pm, UTC Offset = 05:05:00
+Start = 08/09 - 8:00:00 pm, End = 11/09 - 7:54:59 pm, UTC Offset = 05:10:00
+Start = 11/09 - 8:00:00 pm, End = 13/09 - 7:54:59 pm, UTC Offset = 05:15:00
+Start = 13/09 - 8:00:00 pm, End = 16/09 - 7:54:59 pm, UTC Offset = 05:20:00
+Start = 16/09 - 8:00:00 pm, End = 19/09 - 7:54:59 pm, UTC Offset = 05:25:00
+Start = 19/09 - 8:00:00 pm, End = 22/09 - 7:54:59 pm, UTC Offset = 05:30:00
+Start = 22/09 - 8:00:00 pm, End = 25/09 - 7:54:59 pm, UTC Offset = 05:35:00
+Start = 25/09 - 8:00:00 pm, End = 27/09 - 7:54:59 pm, UTC Offset = 05:40:00
+Start = 27/09 - 8:00:00 pm, End = 30/09 - 7:54:59 pm, UTC Offset = 05:45:00
+Start = 30/10 - 8:00:00 pm, End = 03/10 - 7:54:59 pm, UTC Offset = 05:50:00
+Start = 03/10 - 8:00:00 pm, End = 06/10 - 7:54:59 pm, UTC Offset = 05:55:00
+Start = 06/10 - 8:00:00 pm, End = 09/10 - 7:54:59 pm, UTC Offset = 06:00:00
+Start = 09/10 - 8:00:00 pm, End = 12/10 - 7:54:59 pm, UTC Offset = 06:05:00
+Start = 12/10 - 8:00:00 pm, End = 15/10 - 7:54:59 pm, UTC Offset = 06:10:00
+Start = 15/10 - 8:00:00 pm, End = 18/10 - 7:54:59 pm, UTC Offset = 06:15:00
+Start = 18/10 - 8:00:00 pm, End = 21/10 - 7:54:59 pm, UTC Offset = 06:20:00
+Start = 21/10 - 8:00:00 pm, End = 24/10 - 7:54:59 pm, UTC Offset = 06:25:00
+Start = 24/10 - 8:00:00 pm, End = 28/10 - 7:54:59 pm, UTC Offset = 06:30:00
+Start = 28/10 - 8:00:00 pm, End = 31/10 - 7:54:59 pm, UTC Offset = 06:35:00
+Start = 31/11 - 8:00:00 pm, End = 04/11 - 7:54:59 pm, UTC Offset = 06:40:00
+Start = 04/11 - 8:00:00 pm, End = 08/11 - 7:54:59 pm, UTC Offset = 06:45:00
+Start = 08/11 - 8:00:00 pm, End = 12/11 - 7:54:59 pm, UTC Offset = 06:50:00
+Start = 12/11 - 8:00:00 pm, End = 17/11 - 7:54:59 pm, UTC Offset = 06:55:00
+Start = 17/11 - 8:00:00 pm, End = 24/11 - 7:54:59 pm, UTC Offset = 07:00:00
+Start = 24/12 - 8:00:00 pm, End = 11/12 - 7:54:59 pm, UTC Offset = 07:05:00
+Start = 11/12 - 8:00:00 pm, End = 27/12 - 8:04:59 pm, UTC Offset = 07:10:00
+Start = 27/01 - 8:00:00 pm, End = 03/01 - 8:04:59 pm, UTC Offset = 07:05:00

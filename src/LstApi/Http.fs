@@ -54,42 +54,6 @@ module Endpoint =
                 return! handler next ctx
             }
 
-module TimeZoneAdjustments =
-
-    [<CLIMutable>]
-    type TimeZoneAdjustmentsQuery =
-        { [<Required>]
-          latitude: float option
-          [<Required>]
-          longitude: float option
-          offsetResolution: string option }
-
-    let private queryToOptions (query: TimeZoneAdjustmentsQuery) : EndpointResult<TimeZoneAdjustmentOptions> =
-        OffsetResolution.fromStringOption query.offsetResolution
-        |> Result.map (fun offsetResolution ->
-            { Location =
-                { Latitude = query.latitude.Value
-                  Longitude = query.longitude.Value }
-              OffsetResolution = offsetResolution
-              AdjustmentEventOffset = TimeSpan.FromHours(-4)
-              ExtraOffset = TimeSpan.Zero })
-        |> Result.mapError (fun x -> ProblemDetails(Status = 400, Title = "Bad Request", Detail = x))
-
-    let private adjustmentToDto (adjustment: TimeZoneAdjustment) =
-        {| Timestamp = adjustment.Timestamp.ToDateTimeOffset()
-           Offset = adjustment.Offset |}
-
-    let handler: HttpHandler =
-        Endpoint.toHandler (fun ctx ->
-            asyncResult {
-                let! query = EndpointResult.bindQueryString<TimeZoneAdjustmentsQuery> ctx
-                let! options = queryToOptions query
-
-                let adjustments = calculateTimeZoneAdjustments options
-
-                return adjustments |> Seq.map adjustmentToDto |> Seq.toArray
-            })
-
 module Rules =
 
     [<CLIMutable>]
@@ -124,13 +88,11 @@ module Rules =
         |> Result.mapError (fun x -> ProblemDetails(Status = 400, Title = "Bad Request", Detail = x))
 
     let private ruleToDto (rule: TimeZoneRule) =
-        match rule with
-        | TimeZoneRule.OnDate rule ->
-            {| _type = "on_date"
-               month = rule.Month
-               day = rule.Day
-               time_of_day = rule.TimeOfDay
-               offset = rule.Offset |}
+        {| _type = "on_date"
+           month = rule.Start.Month
+           day = rule.Start.Day
+           time_of_day = rule.Start.TimeOfDay
+           offset = rule.Offset |}
 
     let handler: HttpHandler =
         Endpoint.toHandler (fun ctx ->

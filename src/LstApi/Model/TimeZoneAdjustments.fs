@@ -15,15 +15,18 @@ type TimeZoneAdjustment =
     { Timestamp: Timestamp
       Offset: TimeSpan }
 
-type TimeZoneRuleOnDate =
+type TimeZoneRuleBoundary =
     { Month: int
       Day: int
-      TimeOfDay: TimeOnly
+      TimeOfDay: TimeOnly }
+
+type TimeZoneRule =
+    { Start: TimeZoneRuleBoundary
+      End: TimeZoneRuleBoundary
       Offset: TimeSpan }
 
-type TimeZoneRule = OnDate of TimeZoneRuleOnDate
-
 module private Helpers =
+
     let getSunriseTimestamp (location: Geolocation) (timestamp: Timestamp) : Timestamp =
         let dt = DateTime(timestamp |> Timestamp.value, DateTimeKind.Utc)
         let solarTimes = SolarTimes(dt, location.Latitude, location.Longitude)
@@ -56,8 +59,8 @@ module private Helpers =
 
         { Timestamp = lstAdjustmentEventTimestamp
           Offset = offset }
-        
-    let sampleTimeZoneAdjustments (options: TimeZoneAdjustmentOptions) =
+
+    let sampleTimeZoneAdjustments (options: TimeZoneAdjustmentOptions) : TimeZoneAdjustment seq =
         DateTimeHelpers.daysOfYear 2023
         |> Seq.where DateTimeHelpers.isNotLeapDay
         |> Seq.map (DateTimeHelpers.getUtcStartOfDayTicks >> Timestamp)
@@ -66,33 +69,98 @@ module private Helpers =
         |> Seq.map (createAdjustment options.AdjustmentEventOffset options.ExtraOffset)
         |> Seq.takeUntilHeadRepeatedBy (fun x -> x.Timestamp) // Remove the rest of the wrap-around (from repetition above)
         |> Seq.sortBy (fun x -> x.Timestamp) // Again, because we wrapped around, the order might be out-by-one
+
+    let inferRule (adjustment: TimeZoneAdjustment) (nextAdjustment: TimeZoneAdjustment) : TimeZoneRule =
+        let tz = TimeZoneInfo.CreateCustomTimeZone("Lst", adjustment.Offset, "LST", "LST")
+
+        let startDt = TimeZoneInfo.ConvertTime(adjustment.Timestamp.ToDateTimeOffset(), tz)
+
+        let endDt =
+            TimeZoneInfo
+                .ConvertTime(nextAdjustment.Timestamp.ToDateTimeOffset(), tz)
+                .AddSeconds(-1.0)
+
+        { Start =
+            { Month = startDt.Month
+              Day = startDt.Day
+              TimeOfDay = TimeOnly(startDt.Hour, startDt.Minute, startDt.Second) }
+          End =
+            { Month = endDt.Month
+              Day = endDt.Day
+              TimeOfDay = TimeOnly(endDt.Hour, endDt.Minute, endDt.Second) }
+          Offset = adjustment.Offset }
+
+    let getNextOccurenceOfRule
+        (rule: TimeZoneRule)
+        (yearOffset: int)
+        (asAt: DateTimeOffset)
+        : (DateTimeOffset * TimeSpan) =
+        let ruleTimeZone =
+            TimeZoneInfo.CreateCustomTimeZone("LST", rule.Offset, "LST", "LST")
+
+        let ruleStart =
+            DateTimeOffset(
+                DateTime(
+                    asAt.Year + yearOffset,
+                    rule.Start.Month,
+                    rule.Start.Day,
+                    rule.Start.TimeOfDay.Hour,
+                    rule.Start.TimeOfDay.Minute,
+                    rule.Start.TimeOfDay.Second,
+                    DateTimeKind.Unspecified
+                ),
+                ruleTimeZone.BaseUtcOffset
+            )
+
+        let ruleEndWrapped =
+            DateTimeOffset(
+                DateTime(
+                    asAt.Year + yearOffset,
+                    rule.End.Month,
+                    rule.End.Day,
+                    rule.End.TimeOfDay.Hour,
+                    rule.End.TimeOfDay.Minute,
+                    rule.End.TimeOfDay.Second,
+                    DateTimeKind.Unspecified
+                ),
+                ruleTimeZone.BaseUtcOffset
+            )
+
+        let ruleEnd =
+            if ruleEndWrapped < ruleStart then
+                ruleEndWrapped.AddYears(1)
+            else
+                ruleEndWrapped
+
+        if asAt >= ruleStart && asAt.AddSeconds(-1) <= ruleEnd then
+            (ruleStart, TimeSpan.Zero)
+        else
+            (ruleStart, (ruleStart - asAt))
+
+let calculateTimeZoneRules (options: TimeZoneAdjustmentOptions) : TimeZoneRule list =
+    let adjustments = Helpers.sampleTimeZoneAdjustments options
+
+    let rules =
+        adjustments
+        |> Seq.pairwiseWrapped
+        |> Seq.map (fun (adjustment, nextAdjustment) -> Helpers.inferRule adjustment nextAdjustment)
         |> Seq.toList
 
-    let inferRule (adjustment: TimeZoneAdjustment) : TimeZoneRule =
-        let lstTimeZoneInfo =
-            TimeZoneInfo.CreateCustomTimeZone("Lst", adjustment.Offset, "LST", "LST")
-
-        let dt =
-            TimeZoneInfo.ConvertTime(adjustment.Timestamp.ToDateTimeOffset(), lstTimeZoneInfo)
-
-        TimeZoneRule.OnDate
-            { Month = dt.Month
-              Day = dt.Day
-              TimeOfDay = TimeOnly(dt.Hour, dt.Minute, dt.Second)
-              Offset = adjustment.Offset }
-
-let calculateTimeZoneAdjustments (options: TimeZoneAdjustmentOptions) =
-    DateTimeHelpers.daysOfYear 2023
-    |> Seq.where DateTimeHelpers.isNotLeapDay
-    |> Seq.map (DateTimeHelpers.getUtcStartOfDayTicks >> Timestamp)
-    |> Seq.pairWith (Helpers.calculateOffset options.Location options.OffsetResolution)
-    |> (Seq.repeat 2 >> Seq.groupUntilChangedBy snd >> Seq.map snd >> Seq.skip 1) // The first group might be incomplete, so skip it after wrapping around
-    |> Seq.map (Helpers.createAdjustment options.AdjustmentEventOffset options.ExtraOffset)
-    |> Seq.takeUntilHeadRepeatedBy (fun x -> x.Timestamp) // Remove the rest of the wrap-around (from repetition above)
-    |> Seq.sortBy (fun x -> x.Timestamp) // Again, because we wrapped around, the order might be out-by-one
-    |> Seq.toList
-
-let calculateTimeZoneRules (options: TimeZoneAdjustmentOptions) =
-    let adjustments = Helpers.sampleTimeZoneAdjustments options
-    let rules = adjustments |> List.map Helpers.inferRule
     rules
+
+let calculateTimeZoneAdjustments (rules: TimeZoneRule list) (asAt: DateTimeOffset) : TimeZoneAdjustment list =
+    let adjustments =
+        [ -1; 0; 1 ]
+        |> Seq.collect (fun yearOffset ->
+            rules
+            |> Seq.map (fun rule ->
+                let (next, ttl) = Helpers.getNextOccurenceOfRule rule yearOffset asAt
+                (rule, next, ttl)))
+        |> Seq.filter (fun (_, _, ttl) -> ttl >= TimeSpan.Zero && ttl <= TimeSpan.FromDays(365))
+        |> Seq.sortBy (fun (_, _, ttl) -> ttl)
+        |> Seq.map (fun (rule, next, _) ->
+            { Offset = rule.Offset
+              Timestamp = next.UtcTicks |> Timestamp })
+        |> Seq.toList
+        
+    adjustments

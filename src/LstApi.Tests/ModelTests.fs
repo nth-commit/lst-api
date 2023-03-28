@@ -8,7 +8,8 @@ open LstApi.Model
 open LstApi.Model.TimeZoneAdjustments
 
 let formatAdjustment (adjustment: TimeZoneAdjustment) =
-    let adjustmentEventUtc = adjustment.Timestamp.ToDateTimeOffset().ToString("""s""")
+    let adjustmentEventUtc =
+        adjustment.Timestamp.ToDateTimeOffset(adjustment.Offset).ToString("""s""")
 
     let lstTimeZoneInfo =
         TimeZoneInfo.CreateCustomTimeZone("Lst", adjustment.Offset, "LST", "LST")
@@ -19,22 +20,13 @@ let formatAdjustment (adjustment: TimeZoneAdjustment) =
             .ToString("""s""")
 
     $"Adjustment Event (UTC) = %s{adjustmentEventUtc}, Adjustment Event (LST) = %s{adjustmentEventLst}, UTC Offset = %s{adjustment.Offset.ToString()}"
-    
-let formatRule (rule : TimeZoneRule) : string =
-    match rule with
-    | TimeZoneRule.OnDate onDate -> $"Date = %02i{onDate.Day}/%02i{onDate.Month}, Time = {onDate.TimeOfDay}, UTC Offset = {onDate.Offset}"
 
-[<Fact>]
-let ``Snapshots`` () =
-    let adjustments: string list =
-        calculateTimeZoneAdjustments
-            { Location = { Latitude = -43; Longitude = 172 }
-              OffsetResolution = OffsetResolution.FiveMinutes
-              AdjustmentEventOffset = TimeSpan.FromHours(-4)
-              ExtraOffset = TimeSpan.Zero }
-        |> List.map formatAdjustment
+let formatRule (rule: TimeZoneRule) : string =
+    let timeOfDayFormat = "h:mm:ss tt"
 
-    Verifier.Verify(String.concat "\n" adjustments).ToTask() |> Async.AwaitTask
+    $"Start = %02i{rule.Start.Day}/%02i{rule.End.Month} - {rule.Start.TimeOfDay.ToString(timeOfDayFormat)}, "
+    + $"End = %02i{rule.End.Day}/%02i{rule.End.Month} - {rule.End.TimeOfDay.ToString(timeOfDayFormat)}, "
+    + $"UTC Offset = {rule.Offset}"
 
 [<Fact>]
 let ``Snapshot Rules`` () =
@@ -46,4 +38,26 @@ let ``Snapshot Rules`` () =
               ExtraOffset = TimeSpan.Zero }
         |> List.map formatRule
 
-    Verifier.Verify(String.concat "\n" rules).AutoVerify().ToTask() |> Async.AwaitTask
+    Verifier.Verify(String.concat "\n" rules).AutoVerify().ToTask()
+    |> Async.AwaitTask
+
+// [<Fact>]
+// let ``Snapshot Current Rules`` () =
+//     let rules =
+//         calculateTimeZoneRules
+//             { Location = { Latitude = -43; Longitude = 172 }
+//               OffsetResolution = OffsetResolution.FiveMinutes
+//               AdjustmentEventOffset = TimeSpan.FromHours(-4)
+//               ExtraOffset = TimeSpan.Zero }
+//
+//     let calculateCurrentRule (from: DateTimeOffset) = calculateTimeZoneAdjustments rules from
+//
+//     let currentRules: string list =
+//         [ 0 .. (7 * 24) ]
+//         |> Seq.map (fun hours -> DateTimeOffset(DateTime(2023, 1, 1), TimeSpan.Zero).AddHours(hours))
+//         |> Seq.pairWith calculateCurrentRule
+//         |> Seq.map (fun x -> x |> snd |> formatAdjustment)
+//         |> Seq.toList
+//
+//     Verifier.Verify(String.concat "\n" currentRules).AutoVerify().ToTask()
+//     |> Async.AwaitTask

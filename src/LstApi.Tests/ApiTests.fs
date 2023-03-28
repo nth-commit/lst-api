@@ -19,21 +19,21 @@ let ``/ping should return "pong"`` () =
     }
 
 [<Fact>]
-let ``/time-zone-adjustments should 400 with no query params`` () =
+let ``/rules should 400 with no query params`` () =
     task {
         use client = factory.CreateClient()
 
-        let! response = client.GetAsync "/time-zone-adjustments"
+        let! response = client.GetAsync "/rules"
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode)
     }
 
 [<Fact>]
-let ``/time-zone-adjustments should 200 with sufficient query params`` () =
+let ``/rules should 200 with sufficient query params`` () =
     task {
         use client = factory.CreateClient()
 
-        let! response = client.GetAsync "/time-zone-adjustments?latitude=-43&longitude=172"
+        let! response = client.GetAsync "/rules?latitude=-43&longitude=172"
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode)
     }
