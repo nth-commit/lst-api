@@ -7,15 +7,16 @@ open Giraffe
 open LstApi.Util
 open LstApi.Model
 open Microsoft.AspNetCore.Mvc
-open Newtonsoft.Json.Serialization
 
 module Rules =
 
     [<CLIMutable>]
     type Query =
         { [<Required>]
+          [<Range(-90, 90)>]
           latitude: float option
           [<Required>]
+          [<Range(-180, 180)>]
           longitude: float option
           offsetResolution: string option
           adjustmentEventOffsetMinutes: int option
