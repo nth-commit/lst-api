@@ -13,6 +13,7 @@
     <Compile Include="Model\Geolocation.fs" />
     <Compile Include="Model\OffsetResolution.fs" />
     <Compile Include="Model\Timestamp.fs" />
+    <Compile Include="Model\TimeZoneRule.fs" />
     <Compile Include="Model\TimeZoneAdjustments.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Program.fs" />

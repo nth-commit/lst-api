@@ -6,9 +6,8 @@ open FsToolkit.ErrorHandling
 open Giraffe
 open LstApi.Util
 open LstApi.Model
-open LstApi.Model.TimeZoneAdjustments
 open Microsoft.AspNetCore.Mvc
-
+open Newtonsoft.Json.Serialization
 
 module Rules =
 
@@ -18,36 +17,37 @@ module Rules =
           latitude: float option
           [<Required>]
           longitude: float option
-          offsetResolution: string option }
+          offsetResolution: string option
+          adjustmentEventOffsetMinutes: int option
+          extraOffsetMinutes: int option }
 
-    type private AbstractRuleDto =
-        abstract member _type: string
 
-    type private TimeZoneRuleOnDateDto =
-        { month: int
-          day: int
-          timeOfDay: TimeOnly
-          offset: TimeSpan }
-
-        interface AbstractRuleDto with
-            member this._type = "on_date"
-
-    let private queryToOptions (query: Query) : EndpointResult<TimeZoneAdjustmentOptions> =
+    let private queryToOptions (query: Query) : EndpointResult<TimeZoneOptions> =
         OffsetResolution.fromStringOption query.offsetResolution
         |> Result.map (fun offsetResolution ->
             { Location =
                 { Latitude = query.latitude.Value
                   Longitude = query.longitude.Value }
               OffsetResolution = offsetResolution
-              AdjustmentEventOffset = TimeSpan.FromHours(-4)
-              ExtraOffset = TimeSpan.Zero })
+              AdjustmentEventOffset =
+                query.adjustmentEventOffsetMinutes
+                |> Option.map (fun minutes -> TimeSpan.FromMinutes(minutes))
+                |> Option.defaultWith (fun _ -> TimeSpan.FromHours(-4))
+              ExtraOffset =
+                query.extraOffsetMinutes
+                |> Option.map (fun minutes -> TimeSpan.FromMinutes(minutes))
+                |> Option.defaultWith (fun _ -> TimeSpan.Zero) })
         |> Result.mapError (fun x -> ProblemDetails(Status = 400, Title = "Bad Request", Detail = x))
 
-    let private ruleToDto (rule: TimeZoneRule) : TimeZoneRuleOnDateDto =
-        { month = rule.Start.Month
-          day = rule.Start.Day
-          timeOfDay = rule.Start.TimeOfDay
-          offset = rule.Offset }
+    let private ruleBoundaryToDto (ruleBoundary: TimeZoneRuleBoundary) =
+        {| month = ruleBoundary.Month
+           day = ruleBoundary.Day
+           timeOfDay = ruleBoundary.TimeOfDay |}
+
+    let private ruleToDto (rule: TimeZoneRule) =
+        {| start = ruleBoundaryToDto rule.Start
+           ``end`` = ruleBoundaryToDto rule.End
+           offset = rule.Offset |}
 
     let handler: HttpHandler =
         Endpoint.toHandler (fun ctx ->
@@ -55,11 +55,10 @@ module Rules =
                 let! query = EndpointResult.bindQueryString<Query> ctx
                 let! options = queryToOptions query
 
-                let rules = calculateTimeZoneRules options
+                let rules = TimeZoneRule.calculateRules options
 
                 return rules |> Seq.map ruleToDto |> Seq.toArray
             })
-
 
 module Adjustments =
 
@@ -70,23 +69,27 @@ module Adjustments =
           latitude: float option
           [<Required>]
           longitude: float option
-          offsetResolution: string option }
-        
-    type private TimeZoneAdjustmentDto =
-        { timestamp: DateTimeOffset
-          offset: TimeSpan }
+          offsetResolution: string option
+          adjustmentEventOffsetMinutes: int option
+          extraOffsetMinutes: int option }
 
-    let private queryToOptions (query: Query) : EndpointResult<TimeZoneAdjustmentOptions> =
+    let private queryToOptions (query: Query) : EndpointResult<TimeZoneOptions> =
         OffsetResolution.fromStringOption query.offsetResolution
         |> Result.map (fun offsetResolution ->
             { Location =
                 { Latitude = query.latitude.Value
                   Longitude = query.longitude.Value }
               OffsetResolution = offsetResolution
-              AdjustmentEventOffset = TimeSpan.FromHours(-4)
-              ExtraOffset = TimeSpan.Zero })
+              AdjustmentEventOffset =
+                query.adjustmentEventOffsetMinutes
+                |> Option.map (fun minutes -> TimeSpan.FromMinutes(minutes))
+                |> Option.defaultWith (fun _ -> TimeSpan.FromHours(-4))
+              ExtraOffset =
+                query.extraOffsetMinutes
+                |> Option.map (fun minutes -> TimeSpan.FromMinutes(minutes))
+                |> Option.defaultWith (fun _ -> TimeSpan.Zero) })
         |> Result.mapError (fun x -> ProblemDetails(Status = 400, Title = "Bad Request", Detail = x))
-        
+
     let private queryToAsAt (query: Query) : EndpointResult<DateTimeOffset> =
         match query.asAt with
         | Some x -> EndpointResult.Ok x
@@ -100,12 +103,12 @@ module Adjustments =
         Endpoint.toHandler (fun ctx ->
             asyncResult {
                 let! query = EndpointResult.bindQueryString<Query> ctx
-                
+
                 let! options = queryToOptions query
                 let! asAt = queryToAsAt query
 
-                let rules = calculateTimeZoneRules options
-                let adjustments = calculateTimeZoneAdjustments rules asAt
+                let rules = TimeZoneRule.calculateRules options
+                let adjustments = TimeZoneAdjustment.calculateAdjustments rules asAt
 
                 return adjustments |> Seq.map adjustmentToDto |> Seq.toArray
             })

@@ -5,7 +5,6 @@ open System
 open VerifyXunit
 open Xunit
 open LstApi.Model
-open LstApi.Model.TimeZoneAdjustments
 
 let formatAdjustment (adjustment: TimeZoneAdjustment) =
     let adjustmentEventUtc =
@@ -31,7 +30,7 @@ let formatRule (rule: TimeZoneRule) : string =
 [<Fact>]
 let ``Snapshot Rules`` () =
     let rules: string list =
-        calculateTimeZoneRules
+        TimeZoneRule.calculateRules
             { Location = { Latitude = -43; Longitude = 172 }
               OffsetResolution = OffsetResolution.FiveMinutes
               AdjustmentEventOffset = TimeSpan.FromHours(-4)
