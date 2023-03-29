@@ -4,7 +4,10 @@ open Microsoft.Extensions.Hosting
 open LstApi
 
 let routes: HttpHandler =
-    choose [ route "/ping" >=> text "pong"; route "/rules" >=> Http.Rules.handler ]
+    choose
+        [ route "/ping" >=> text "pong"
+          route "/rules" >=> Http.Rules.handler
+          route "/adjustments" >=> Http.Adjustments.handler ]
 
 let builder = WebApplication.CreateBuilder()
 builder.Services.AddGiraffe() |> ignore

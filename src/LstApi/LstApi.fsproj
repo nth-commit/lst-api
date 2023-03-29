@@ -9,6 +9,7 @@
     <Compile Include="Util\Seq.fs" />
     <Compile Include="Util\List.fs" />
     <Compile Include="Util\DateTimeHelpers.fs" />
+    <Compile Include="Util\Endpoint.fs" />
     <Compile Include="Model\Geolocation.fs" />
     <Compile Include="Model\OffsetResolution.fs" />
     <Compile Include="Model\Timestamp.fs" />
