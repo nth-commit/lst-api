@@ -6,15 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Util\Seq.fs" />
-    <Compile Include="Util\List.fs" />
-    <Compile Include="Util\DateTimeHelpers.fs" />
-    <Compile Include="Util\Endpoint.fs" />
-    <Compile Include="Model\Geolocation.fs" />
-    <Compile Include="Model\OffsetResolution.fs" />
-    <Compile Include="Model\Timestamp.fs" />
-    <Compile Include="Model\TimeZoneRule.fs" />
-    <Compile Include="Model\TimeZoneAdjustments.fs" />
+    <Compile Include="Endpoint.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -23,6 +15,10 @@
     <PackageReference Include="FsToolkit.ErrorHandling" Version="4.5.0-beta002" />
     <PackageReference Include="Giraffe" Version="6.0.0" />
     <PackageReference Include="SolarCalculator" Version="3.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LstApi.Model\LstApi.Model.fsproj" />
   </ItemGroup>
 
 </Project>

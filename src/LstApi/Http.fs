@@ -4,7 +4,6 @@ open System
 open System.ComponentModel.DataAnnotations
 open FsToolkit.ErrorHandling
 open Giraffe
-open LstApi.Util
 open LstApi.Model
 open Microsoft.AspNetCore.Mvc
 

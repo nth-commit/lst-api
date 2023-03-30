@@ -2,7 +2,6 @@
 
 open System
 open Innovative.SolarCalculator
-open LstApi.Util
 open LstApi.Model
 
 type TimeZoneOptions =
@@ -28,6 +27,25 @@ module TimeZoneRule =
         type TimeZoneAdjustment =
             { Timestamp: Timestamp
               Offset: TimeSpan }
+
+        let isLeapDay (date: DateOnly) : bool = (date.Month = 2 && date.Day = 29)
+
+        let isNotLeapDay = isLeapDay >> not
+
+        let daysOfYear (year: int) : DateOnly seq =
+            let start = DateOnly(year, 1, 1)
+
+            let nextDay (date: DateOnly) =
+                let date0 = date.AddDays(1)
+                (date0, date0) |> Some
+
+            let isInYear (date: DateOnly) : bool = date.Year = year
+
+            Seq.unfold nextDay start |> Seq.takeWhile isInYear
+
+        let getUtcStartOfDayTicks (date: DateOnly) : int64 =
+            let dt = DateTimeOffset(DateTime(date.Year, date.Month, date.Day), TimeSpan.Zero)
+            dt.UtcDateTime.Ticks
 
         let getSunriseTimestamp (location: Geolocation) (timestamp: Timestamp) : Timestamp =
             let dt = DateTime(timestamp |> Timestamp.value, DateTimeKind.Utc)
@@ -63,9 +81,9 @@ module TimeZoneRule =
               Offset = offset }
 
         let sampleTimeZoneAdjustments (options: TimeZoneOptions) : TimeZoneAdjustment seq =
-            DateTimeHelpers.daysOfYear 2023
-            |> Seq.where DateTimeHelpers.isNotLeapDay
-            |> Seq.map (DateTimeHelpers.getUtcStartOfDayTicks >> Timestamp)
+            daysOfYear 2023
+            |> Seq.where isNotLeapDay
+            |> Seq.map (getUtcStartOfDayTicks >> Timestamp)
             |> Seq.pairWith (calculateOffset options.Location options.OffsetResolution)
             |> (Seq.repeat 2 >> Seq.groupUntilChangedBy snd >> Seq.map snd >> Seq.skip 1) // The first group might be incomplete, so skip it after wrapping around
             |> Seq.map (createAdjustment options.AdjustmentEventOffset options.ExtraOffset)

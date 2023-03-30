@@ -1,4 +1,4 @@
-namespace LstApi.Util
+namespace LstApi
 
 open System.ComponentModel.DataAnnotations
 open System.Collections.Generic

@@ -1,4 +1,4 @@
-﻿module Seq
+﻿module internal Seq
 
 let repeat (loops: int) (a: 'a seq) : 'a seq =
     let rec loop (n: int) (a: 'a seq) : 'a seq =

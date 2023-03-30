@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Util\Seq.fs" />
+        <Compile Include="Util\List.fs" />
+        <Compile Include="Util\DateTimeHelpers.fs" />
+        <Compile Include="Geolocation.fs" />
+        <Compile Include="OffsetResolution.fs" />
+        <Compile Include="Timestamp.fs" />
+        <Compile Include="TimeZoneRule.fs" />
+        <Compile Include="TimeZoneAdjustments.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SolarCalculator" Version="3.2.1" />
+    </ItemGroup>
+
+</Project>
