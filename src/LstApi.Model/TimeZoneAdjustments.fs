@@ -5,7 +5,8 @@ open LstApi.Model
 
 type TimeZoneAdjustment =
     { Timestamp: Timestamp
-      Offset: TimeSpan }
+      Offset: TimeSpan
+      Rule: TimeZoneRule }
 
 module TimeZoneAdjustment =
 
@@ -67,7 +68,8 @@ module TimeZoneAdjustment =
             |> Seq.sortBy (fun (_, _, ttl) -> ttl)
             |> Seq.map (fun (rule, next, _) ->
                 { Offset = rule.Offset
-                  Timestamp = next.UtcTicks |> Timestamp })
+                  Timestamp = next.UtcTicks |> Timestamp
+                  Rule = rule })
             |> Seq.toList
 
         adjustments
