@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lst.Native", "Lst.Native\Ls
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lst.Model", "Lst.Model\Lst.Model.fsproj", "{6642EB75-7B68-4525-BC15-D8E0FE825043}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lst.WindowsService", "Lst.WindowsService\Lst.WindowsService.csproj", "{6AB96A4A-513A-4CD0-84B2-8528B3DEAA57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{6642EB75-7B68-4525-BC15-D8E0FE825043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6642EB75-7B68-4525-BC15-D8E0FE825043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6642EB75-7B68-4525-BC15-D8E0FE825043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB96A4A-513A-4CD0-84B2-8528B3DEAA57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB96A4A-513A-4CD0-84B2-8528B3DEAA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB96A4A-513A-4CD0-84B2-8528B3DEAA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB96A4A-513A-4CD0-84B2-8528B3DEAA57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

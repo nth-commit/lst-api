@@ -1,4 +1,4 @@
-namespace Lst.Model
+﻿namespace Lst.Model
 
 open System
 open Lst.Model
