@@ -1,12 +1,12 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LstApi.Tests", "LstApi.Tests\LstApi.Tests.fsproj", "{51F00931-CCED-4072-969C-0240E0E375CF}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lst.Tests", "Lst.Tests\Lst.Tests.fsproj", "{51F00931-CCED-4072-969C-0240E0E375CF}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LstApi", "LstApi\LstApi.fsproj", "{7D47986B-26F9-4D82-8AC3-E3909E17CD67}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lst", "Lst\Lst.fsproj", "{7D47986B-26F9-4D82-8AC3-E3909E17CD67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LstApi.Native", "LstApi.Native\LstApi.Native.csproj", "{44559EB9-D744-45E7-926D-A883FA433F22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lst.Native", "Lst.Native\Lst.Native.csproj", "{44559EB9-D744-45E7-926D-A883FA433F22}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LstApi.Model", "LstApi.Model\LstApi.Model.fsproj", "{6642EB75-7B68-4525-BC15-D8E0FE825043}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Lst.Model", "Lst.Model\Lst.Model.fsproj", "{6642EB75-7B68-4525-BC15-D8E0FE825043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

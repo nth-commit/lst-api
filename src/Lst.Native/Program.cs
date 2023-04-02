@@ -1,8 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 
-using LstApi.Model;
-using LstApi.Native;
-using LstApi.Native.Platforms;
+using Lst.Model;
+using Lst.Native;
+using Lst.Native.Platforms;
 
 var lstRules = TimeZoneRuleModule.calculateRules(new TimeZoneOptions(
     new Geolocation(-43, 172),

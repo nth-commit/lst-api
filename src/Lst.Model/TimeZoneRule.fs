@@ -1,8 +1,8 @@
-﻿namespace LstApi.Model
+namespace Lst.Model
 
 open System
 open Innovative.SolarCalculator
-open LstApi.Model
+open Lst.Model
 
 type TimeZoneOptions =
     { Location: Geolocation

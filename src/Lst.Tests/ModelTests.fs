@@ -4,7 +4,7 @@ module Tests
 open System
 open VerifyXunit
 open Xunit
-open LstApi.Model
+open Lst.Model
 
 let formatAdjustment (adjustment: TimeZoneAdjustment) =
     let adjustmentEventUtc =

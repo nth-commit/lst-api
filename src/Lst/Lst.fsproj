@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>LstApi</RootNamespace>
+    <RootNamespace>Lst</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LstApi.Model\LstApi.Model.fsproj" />
+    <ProjectReference Include="..\Lst.Model\Lst.Model.fsproj" />
   </ItemGroup>
 
 </Project>

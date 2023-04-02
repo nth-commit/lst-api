@@ -1,4 +1,4 @@
-﻿namespace LstApi.Model
+namespace Lst.Model
 
 open System
 

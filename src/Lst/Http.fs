@@ -1,10 +1,10 @@
-module LstApi.Http
+module Lst.Http
 
 open System
 open System.ComponentModel.DataAnnotations
 open FsToolkit.ErrorHandling
 open Giraffe
-open LstApi.Model
+open Lst.Model
 open Microsoft.AspNetCore.Mvc
 
 module Rules =

@@ -1,4 +1,4 @@
-module LstApi.Tests.ApiTests
+module Lst.Tests.ApiTests
 
 open System.Net
 open Microsoft.AspNetCore.Mvc.Testing

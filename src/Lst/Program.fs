@@ -1,7 +1,7 @@
 open Giraffe
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Hosting
-open LstApi
+open Lst
 
 let routes: HttpHandler =
     choose

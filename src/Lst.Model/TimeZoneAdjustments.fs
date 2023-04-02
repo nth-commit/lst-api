@@ -1,7 +1,7 @@
-﻿namespace LstApi.Model
+namespace Lst.Model
 
 open System
-open LstApi.Model
+open Lst.Model
 
 type TimeZoneAdjustment =
     { Timestamp: Timestamp
