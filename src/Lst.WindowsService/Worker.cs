@@ -24,7 +24,6 @@ public class Worker : BackgroundService
         TimeSpan.FromHours(-4),
         TimeSpan.Zero);
 
-
     public Worker(ILogger<Worker> logger)
     {
         _logger = logger;

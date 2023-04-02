@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Lst\Lst.fsproj" />
+        <ProjectReference Include="..\Lst.Api\Lst.Api.fsproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-module Lst.Http
+module Lst.Api.Http
 
 open System
 open System.ComponentModel.DataAnnotations

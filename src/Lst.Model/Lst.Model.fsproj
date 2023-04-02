@@ -8,7 +8,6 @@
     <ItemGroup>
         <Compile Include="Util\Seq.fs" />
         <Compile Include="Util\List.fs" />
-        <Compile Include="Util\DateTimeHelpers.fs" />
         <Compile Include="Geolocation.fs" />
         <Compile Include="OffsetResolution.fs" />
         <Compile Include="Timestamp.fs" />
