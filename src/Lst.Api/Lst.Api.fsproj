@@ -9,6 +9,7 @@
     <Compile Include="Endpoint.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Program.fs" />
+    <Content Include="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
